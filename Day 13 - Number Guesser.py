@@ -30,9 +30,20 @@ logo = """
 # initialization zone
 num_turns = 0
 player_wins = False
-
 # here is the number I'm thinking of
 the_answer = random.randint(1, 100)
+
+# function to check how the guess compares to the answer
+def check_answer(guess):
+  if guess < the_answer:
+    return "TOO LOW"
+  elif guess > the_answer:
+    return "TOO HIGH"
+  else:
+    return "JUST RIGHT"
+
+
+
 
 print(logo)
 print("Welcome to the Number Guesser!")
@@ -48,17 +59,18 @@ else:
 while num_turns > 0:
   print(f"You have {num_turns} guesses left.")
   guess = int(input("What is your guess? "))
-  if guess < the_answer:
+  if check_answer(guess) == "TOO LOW":
     print("Your guess is too low.")
-  elif guess > the_answer:
+  elif check_answer(guess) == "TOO HIGH":
     print("Your guess is too high.")
-  else:
-    print(f"You got it right! The answer was {the_answer}!")
+  elif check_answer(guess) == "JUST RIGHT":
     player_wins = True
-    num_turns = 0 # this ends the guessing loop
+    num_turns = 0
 
   num_turns -= 1 # decrease the number of turns by 1 and repeat
 
 # after the loop
-if player_wins == False:
+if player_wins == True:
+  print(f"You got it right! The answer was {the_answer}!")
+else:  
   print(f"Sorry, you ran out of guesses. The answer was {the_answer}")
